@@ -62,7 +62,7 @@ def commandes_affiche(request, commandes_id):
     return render(request,"drive/commandes/affiche.html",{"Commandes": Commandes})
 
 
------------------------------------------------------------------------------------------
+##-----------------------------------------------------------------------------------------
 
 def liste_produits(request):
     return render(request, 'drive/liste_produits/liste_produits.html')
