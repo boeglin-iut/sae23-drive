@@ -12,21 +12,6 @@ def categories_add(request):
 def categories_edit(request, id):
     return render(request, 'drive/categories/categories_edit.html')
 
-def categories_delete(request, id):
-    return render(request, 'drive/categories/categories_delete.html')
-
-def clients(request):
-    return render(request, 'drive/clients/commandes.html')
-
-def clients_add(request):
-    return render(request, 'drive/clients/clients_add.html')
-
-def clients_edit(request, id):
-    return render(request, 'drive/clients/clients_edit.html')
-
-def clients_delete(request, id):
-    return render(request, 'drive/clients/clients_delete.html')
-
 #---------------------------------------------------------------------------------------
 #Commandes
 def commandes(request):
