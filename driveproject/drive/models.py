@@ -8,10 +8,9 @@
 from django.db import models
 
 
-class Categorie(models.Model):
-    id_cat = models.IntegerField(primary_key=True)
-    nom = models.CharField(max_length=50, blank=True, null=True)
-    descriptif = models.CharField(max_length=50, blank=True, null=True)
+class Categories(models.Model):
+    nom = models.CharField(max_length=50)
+    descriptif = models.TextField(blank=True, null=True)
 
     class Meta:
         managed = False
@@ -19,11 +18,10 @@ class Categorie(models.Model):
 
 
 class Clients(models.Model):
-    id_client = models.IntegerField(primary_key=True)
-    nom = models.CharField(max_length=50, blank=True, null=True)
-    prenom = models.CharField(max_length=50, blank=True, null=True)
+    nom = models.CharField(max_length=100)
+    prenom = models.CharField(max_length=100)
     date_inscription = models.DateField(blank=True, null=True)
-    adresse = models.CharField(max_length=100, blank=True, null=True)
+    adresse = models.TextField(blank=True, null=True)
 
     class Meta:
         managed = False
@@ -31,7 +29,6 @@ class Clients(models.Model):
 
 
 class Commandes(models.Model):
-    id_commande = models.IntegerField(primary_key=True)
     id_client = models.ForeignKey(Clients, models.DO_NOTHING, db_column='id_client', blank=True, null=True)
     date = models.DateField(blank=True, null=True)
 
@@ -40,24 +37,23 @@ class Commandes(models.Model):
         db_table = 'commandes'
 
 
-class ListeProduits(models.Model):
-    id_liste = models.IntegerField(primary_key=True)
-    quantite = models.IntegerField(blank=True, null=True)
-    id_produit = models.ForeignKey('Produit', models.DO_NOTHING, db_column='id_produit', blank=True, null=True)
+class ListeProduit(models.Model):
     id_commande = models.ForeignKey(Commandes, models.DO_NOTHING, db_column='id_commande', blank=True, null=True)
+    id_produit = models.ForeignKey('Produits', models.DO_NOTHING, db_column='id_produit', blank=True, null=True)
+    quantite = models.IntegerField(blank=True, null=True)
 
     class Meta:
         managed = False
-        db_table = 'liste_produits'
+        db_table = 'liste_produit'
 
 
-class Produit(models.Model):
-    id_produit = models.IntegerField(primary_key=True)
-    nom = models.CharField(max_length=50, blank=True, null=True)
+class Produits(models.Model):
+    nom = models.CharField(max_length=50)
     date_de_peremption = models.DateField(blank=True, null=True)
-    marque = models.CharField(max_length=50, blank=True, null=True)
+    photo = models.ImageField()
+    marque = models.CharField(max_length=100, blank=True, null=True)
     prix = models.DecimalField(max_digits=10, decimal_places=2, blank=True, null=True)
-    id_categorie = models.ForeignKey(Categorie, models.DO_NOTHING, db_column='id_categorie', blank=True, null=True)
+    id_categorie = models.ForeignKey(Categories, models.DO_NOTHING, db_column='id_categorie', blank=True, null=True)
 
     class Meta:
         managed = False
