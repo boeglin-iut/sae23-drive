@@ -2,6 +2,9 @@ from django import forms
 from django.forms import ModelForm
 from django.utils.translation import gettext_lazy as _
 from . import models
+from django.forms import ModelForm
+from django.utils.translation import gettext_lazy as _
+from . import models
 
 class CategoriesForm(ModelForm):
     class Meta:
