@@ -1,7 +1,7 @@
 from django.http import HttpResponseRedirect
 from django.shortcuts import render
 
-from .forms import CategoriesForm, ClientsForm, ProduitsForm
+from .forms import CategoriesForm, ClientsForm, CommandesForm, ProduitsForm
 from .models import Categories, Clients, Commandes, ListeProduit, Produits
 
 def index(request):
@@ -24,25 +24,56 @@ def categories_add(request):
         return render(request, 'drive/categories/add.html', {'catform': catform})
 
 def categories_edit(request, id):
-    return render(request, 'drive/categories/categories_edit.html')
+    Categorie = Categories.objects.get(id=id)
+    if request.method == 'POST':
+        catform = CategoriesForm(request.POST, instance=Categorie)
+        if catform.is_valid():
+            catform.save()
+            return render(request, 'drive/categories/categories.html', {'Categories': Categories.objects.all()})
+        else:
+            return render(request, 'drive/categories/edit.html', {'catform': catform})
+    else:
+        catform = CategoriesForm(instance=Categorie)
+        return render(request, 'drive/categories/edit.html', {'catform': catform})
 
 def categories_delete(request, id):
     Categorie = Categories.objects.get(id=id)
     Categorie.delete()
-    #return HttpResponseRedirect('/drive/categories/')
     return render(request, 'drive/categories/delete.html')
 
 def clients(request):
     Client = Clients.objects.all()
-    return render(request, 'drive/clients/commandes.html', {'Clients': Client})
+    return render(request, 'drive/clients/clients.html', {'Clients': Client})
 
 def clients_add(request):
-    return render(request, 'drive/clients/add.html')
+    if request.method == 'POST':
+        cliform = ClientsForm(request.POST)
+        if cliform.is_valid():
+            cliform.save()
+            return render(request, 'drive/clients/clients.html', {'Clients': Clients.objects.all()})
+        else:
+            return render(request, 'drive/clients/add.html', {'cliform': cliform})
+    else:
+        cliform = ClientsForm()
+        return render(request, 'drive/clients/add.html', {'cliform': cliform})
 
 def clients_edit(request, id):
-    return render(request, 'drive/clients/edit.html')
+    if request.method == 'POST':
+        Client = Clients.objects.get(id=id)
+        cliform = ClientsForm(request.POST, instance=Client)
+        if cliform.is_valid():
+            cliform.save()
+            return render(request, 'drive/clients/clients.html', {'Clients': Clients.objects.all()})
+        else:
+            return render(request, 'drive/clients/edit.html', {'cliform': cliform})
+    else:
+        Client = Clients.objects.get(id=id)
+        cliform = ClientsForm(instance=Client)
+        return render(request, 'drive/clients/edit.html', {'cliform': cliform})
 
 def clients_delete(request, id):
+    Client = Clients.objects.get(id=id)
+    Client.delete()
     return render(request, 'drive/clients/delete.html')
 
 def commandes(request):
@@ -50,7 +81,17 @@ def commandes(request):
     return render(request, 'drive/commandes/commandes.html', {'Commandes': Commande})
 
 def commandes_add(request):
-    return render(request, 'drive/commandes/add.html')
+    # définir l'ID de la personne qui commande afin de créer une nouvelle commande
+    if request.method == 'POST':
+        comform = CommandesForm(request.POST)
+        if comform.is_valid():
+            comform.save()
+            return render(request, 'drive/commandes/commandes.html', {'Commandes': Commandes.objects.all()})
+        else:
+            return render(request, 'drive/commandes/add.html', {'comform': comform})
+    else:
+        comform = CommandesForm()
+        return render(request, 'drive/commandes/add.html', {'comform': comform})
 
 def commandes_edit(request, id):
     return render(request, 'drive/commandes/edit.html')
@@ -60,7 +101,7 @@ def commandes_delete(request, id):
 
 def liste_produits(request):
     Liste_Produit = ListeProduit.objects.all()
-    return render(request, 'drive/liste_produits/liste_produits.html', {'Liste_Produit': Liste_Produit})
+    return render(request, 'drive/liste_produits/liste_produits.html', {'Produits': Liste_Produit})
 
 def liste_produits_add(request):
     return render(request, 'drive/liste_produits/add.html')
@@ -88,7 +129,16 @@ def produits_add(request):
         return render(request, 'drive/produits/add.html', {'prodform': prodform})
 
 def produits_edit(request, id):
-    return render(request, 'drive/produits/edit.html')
+    if request.method == 'POST':
+        Produit = Produits.objects.get(id=id)
+        prodform = ProduitsForm(request.POST, request.FILES, instance=Produit)
+        if prodform.is_valid():
+            prodform.save()
+            return render(request, 'drive/produits/produits.html', {'Produits': Produits.objects.all()})
+        else:
+            return render(request, 'drive/produits/edit.html', {'prodform': prodform})
 
 def produits_delete(request, id):
+    Produit = Produits.objects.get(id=id)
+    Produit.delete()
     return render(request, 'drive/produits/delete.html')

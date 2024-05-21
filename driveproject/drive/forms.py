@@ -22,6 +22,14 @@ class ClientsForm(ModelForm):
             'adresse': _('Adresse'),
         }
 
+class CommandesForm(ModelForm):
+    class Meta:
+        model = models.Commandes
+        fields = '__all__'
+        labels = {
+            'id_client': _('Client'),
+        }
+
 class ProduitsForm(ModelForm):
     class Meta:
         model = models.Produits

@@ -3,4 +3,8 @@
 {% block title %}Liste des produits{% endblock %}
 
 {% block content %}
+    <h1>Liste des produits</h1>
+    {% for produits in Produits %}
+        <p>ID: {{ produits.id }} ; Nom : {{ produits.nom }} ; Date de péremption : {{ produits.date_de_peremption }} ; Photo : <img src="/media/{{ produits.photo }}" alt="{{ produits.nom }}"> ; Marque : {{ produits.marque }} ; Prix : {{ produits.prix }} ; ID_catégorie : {{ produits.id_categorie }}</p>
+    {% endfor %}
 {% endblock %}

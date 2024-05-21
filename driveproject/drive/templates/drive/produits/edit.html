@@ -3,4 +3,10 @@
 {% block title %}Modification d'un produit{% endblock %}
 
 {% block content %}
+    <h1>Modification d'un produit</h1>
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ prodform.as_ul }}
+        <button type="submit">Modifier</button>
+    </form>
 {% endblock %}

@@ -3,4 +3,10 @@
 {% block title %}Ajout d'une commande{% endblock %}
 
 {% block content %}
+    <h1>Ajout d'une commande</h1>
+    <form method="post">
+        {% csrf_token %}
+        {{ comform.as_ul }}
+        <button type="submit">Ajouter</button>
+    </form>
 {% endblock %}
