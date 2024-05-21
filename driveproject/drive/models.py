@@ -50,7 +50,7 @@ class ListeProduit(models.Model):
 class Produits(models.Model):
     nom = models.CharField(max_length=50)
     date_de_peremption = models.DateField(blank=True, null=True)
-    photo = models.ImageField()
+    photo = models.ImageField(max_length=255, blank=True, null=True)
     marque = models.CharField(max_length=100, blank=True, null=True)
     prix = models.DecimalField(max_digits=10, decimal_places=2, blank=True, null=True)
     id_categorie = models.ForeignKey(Categories, models.DO_NOTHING, db_column='id_categorie', blank=True, null=True)

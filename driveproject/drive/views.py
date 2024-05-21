@@ -77,7 +77,7 @@ def produits(request):
 
 def produits_add(request):
     if request.method == 'POST':
-        prodform = ProduitsForm(request.POST)
+        prodform = ProduitsForm(request.POST, request.FILES)
         if prodform.is_valid():
             prodform.save()
             return render(request, 'drive/produits/produits.html', {'Produits': Produits.objects.all()})
