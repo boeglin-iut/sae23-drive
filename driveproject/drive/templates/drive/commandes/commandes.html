@@ -3,4 +3,8 @@
 {% block title %}Liste des commandes{% endblock %}
 
 {% block content %}
+    <h1>Liste des commandes</h1>
+    {% for commandes in Commandes %}
+        <p>ID : {{ commandes.id }} ; ID_client : {{ commandes.id_client }} ; Date : {{ commandes.date }}</p>
+    {% endfor %}
 {% endblock %}

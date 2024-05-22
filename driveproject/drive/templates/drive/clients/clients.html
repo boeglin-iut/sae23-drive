@@ -3,4 +3,8 @@
 {% block title %}Liste des client{% endblock %}
 
 {% block content %}
+    <h1>Liste des clients</h1>
+    {% for client in Clients %}
+        <p>ID: {{ client.id }} ; Nom : {{ client.nom }} ; Prénom : {{ client.prenom }} ; Date d'inscription : {{ client.date_inscription }} ; Adresse : {{ client.adresse }}</p>
+    {% endfor %}
 {% endblock %}
