@@ -1,3 +1,5 @@
+from datetime import datetime
+
 from django.http import HttpResponseRedirect
 from django.shortcuts import render
 
@@ -49,7 +51,10 @@ def clients_add(request):
     if request.method == 'POST':
         cliform = ClientsForm(request.POST)
         if cliform.is_valid():
-            cliform.save()
+            form = cliform.save(commit=False)
+            date = datetime.now().date()
+            form.date_inscription = date
+            form.save()
             return render(request, 'drive/clients/clients.html', {'Clients': Clients.objects.all()})
         else:
             return render(request, 'drive/clients/add.html', {'cliform': cliform})
@@ -80,12 +85,18 @@ def commandes(request):
     Commande = Commandes.objects.all()
     return render(request, 'drive/commandes/commandes.html', {'Commandes': Commande})
 
+def commandes_id(request, id):
+    Commande = Commandes.objects.get(id=id)
+    return render(request, 'drive/commandes/commande_detail.html', {'Commandes': Commande})
+
 def commandes_add(request):
-    # définir l'ID de la personne qui commande afin de créer une nouvelle commande
     if request.method == 'POST':
         comform = CommandesForm(request.POST)
         if comform.is_valid():
-            comform.save()
+            form = comform.save(commit=False)
+            date = datetime.now().date()
+            form.date = date
+            form.save()
             return render(request, 'drive/commandes/commandes.html', {'Commandes': Commandes.objects.all()})
         else:
             return render(request, 'drive/commandes/add.html', {'comform': comform})
@@ -94,22 +105,47 @@ def commandes_add(request):
         return render(request, 'drive/commandes/add.html', {'comform': comform})
 
 def commandes_edit(request, id):
-    return render(request, 'drive/commandes/edit.html')
+    if request.method == 'POST':
+        Commande = Commandes.objects.get(id=id)
+        comform = CommandesForm(request.POST, instance=Commande)
+        if comform.is_valid():
+            comform.save()
+            return render(request, 'drive/commandes/commandes.html', {'Commandes': Commandes.objects.all()})
+        else:
+            return render(request, 'drive/commandes/edit.html', {'comform': comform})
+    else:
+        Commande = Commandes.objects.get(id=id)
+        comform = CommandesForm(instance=Commande)
+        return render(request, 'drive/commandes/edit.html', {'comform': comform})
 
 def commandes_delete(request, id):
+    Commande = Commandes.objects.get(id=id)
+    Commande.delete()
     return render(request, 'drive/commandes/delete.html')
 
-def liste_produits(request):
-    Liste_Produit = ListeProduit.objects.all()
+def liste_produits(request, id):
+    Liste_Produit = ListeProduit.objects.get(id=id)
     return render(request, 'drive/liste_produits/liste_produits.html', {'Produits': Liste_Produit})
 
-def liste_produits_add(request):
-    return render(request, 'drive/liste_produits/add.html')
+def liste_produits_add(request, id_prod, id_com, quantite):
+    Produit = Produits.objects.get(id=id_prod)
+    Commande = Commandes.objects.get(id=id_com)
+    form = ListeProduit()
+    form.id_produit = Produit
+    form.id_commande = Commande
+    form.quantite = quantite
+    form.save()
+    return render(request, 'drive/liste_produits/liste_produits.html', {'Produits': ListeProduit.objects.all()})
 
-def liste_produits_edit(request, id):
-    return render(request, 'drive/liste_produits/edit.html')
+def liste_produits_edit(request, id, new_quantite):
+    Produit = ListeProduit.objects.get(id=id)
+    Produit.quantite = new_quantite
+    Produit.save()
+    return render(request, 'drive/liste_produits/liste_produits.html', {'Produits': ListeProduit.objects.all()})
 
 def liste_produits_delete(request, id):
+    Produit = ListeProduit.objects.get(id=id)
+    Produit.delete()
     return render(request, 'drive/liste_produits/delete.html')
 
 def produits(request):

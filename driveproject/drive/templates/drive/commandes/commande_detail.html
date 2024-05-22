@@ -1,0 +1,8 @@
+{% extends "drive/base.html" %}
+
+{% block title %}Détail de la commande n°{{ Commandes.id }}{% endblock %}
+
+{% block content %}
+    <h1>Détail de la commande n°{{ Commandes.id }}</h1>
+    <p>ID : {{ Commandes.id }} ; ID_client : {{ Commandes.id_client }} ; Date : {{ Commandes.date }}</p>
+{% endblock %}

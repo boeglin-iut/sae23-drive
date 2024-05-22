@@ -18,14 +18,14 @@ urlpatterns = [
     path('clients/delete/<int:id>/', views.clients_delete),
 
     path('commandes/', views.commandes),
-    path('commandes/<int:id>/', views.commandes),
+    path('commandes/<int:id>/', views.commandes_id),
     path('commandes/add/', views.commandes_add),
     path('commandes/edit/<int:id>/', views.commandes_edit),
     path('commandes/delete/<int:id>/', views.commandes_delete),
 
-    path('liste_produits/', views.liste_produits),
-    path('liste_produits/add/', views.liste_produits_add),
-    path('liste_produits/edit/<int:id>/', views.liste_produits_edit),
+    path('liste_produits/<int:id>', views.liste_produits),
+    path('liste_produits/add/<int:id_prod>/<int:id_com>/<int:quantite>/', views.liste_produits_add),
+    path('liste_produits/edit/<int:id>/<int:new_quantite>/', views.liste_produits_edit),
     path('liste_produits/delete/<int:id>/', views.liste_produits_delete),
 
     path('produits/', views.produits),

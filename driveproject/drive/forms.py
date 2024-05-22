@@ -6,7 +6,7 @@ from . import models
 class CategoriesForm(ModelForm):
     class Meta:
         model = models.Categories
-        fields = '__all__'
+        fields = ['nom', 'descriptif']
         labels = {
             'nom': _('Nom'),
             'descriptif': _('Descriptif'),
@@ -15,7 +15,7 @@ class CategoriesForm(ModelForm):
 class ClientsForm(ModelForm):
     class Meta:
         model = models.Clients
-        fields = '__all__'
+        fields = ['nom', 'prenom', 'adresse']
         labels = {
             'nom': _('Nom'),
             'prenom': _('Prénom'),
@@ -25,7 +25,7 @@ class ClientsForm(ModelForm):
 class CommandesForm(ModelForm):
     class Meta:
         model = models.Commandes
-        fields = '__all__'
+        fields = ['id_client']
         labels = {
             'id_client': _('Client'),
         }
@@ -33,7 +33,7 @@ class CommandesForm(ModelForm):
 class ProduitsForm(ModelForm):
     class Meta:
         model = models.Produits
-        fields = '__all__'
+        fields = ['nom', 'date_de_peremption', 'photo', 'marque', 'prix', 'id_categorie']
         labels = {
             'nom': _('Nom'),
             'date_de_peremption': _('Date de péremption'),
