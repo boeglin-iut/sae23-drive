@@ -17,10 +17,9 @@ urlpatterns = [
     path('clients/edit/<int:id>/', views.clients_edit),
     path('clients/delete/<int:id>/', views.clients_delete),
 
-    path('commandes/add', views.commandes_add),
-    path('traitementcommande/', views.commandes_traitement),
-    path('commandes_affiche/<int:id>/', views.commandes_affiche),
     path('commandes/', views.commandes),
+    path('commandes/<int:id>/', views.commandes),
+    path('commandes/add', views.commandes_add),
     path('commandes/edit/<int:id>/', views.commandes_edit),
     path('commandes/delete/<int:id>/', views.commandes_delete),
 
