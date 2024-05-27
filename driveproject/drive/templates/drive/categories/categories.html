@@ -1,10 +1,25 @@
 {% extends "drive/base.html" %}
-
+{% load static %}
 {% block title %}Liste des catégories{% endblock %}
 
 {% block content %}
     <h1>Liste des catégories</h1>
-    {% for categorie in Categories %}
-        <p>ID: {{ categorie.id }} ; Nom : {{ categorie.nom }} ; Descriptif : {{ categorie.descriptif }}</p>
-    {% endfor %}
+    <button class="button-68"><a href="/drive/categories/add/">Ajouter une catégorie</a></button>
+    <table>
+        <tr>
+            <th>ID</th>  <!-- New column for ID -->
+            <th>Nom</th>
+            <th>Actions</th>  <!-- New column for actions -->
+        </tr>
+        {% for categorie in Categories %}
+        <tr>
+            <td>{{ categorie.id }}</td>  <!-- Display the ID -->
+            <td>{{ categorie.nom }}</td>
+            <td style="text-align: center;">
+                <a class="button-68" href="edit/{{ categorie.id }}">update</a>
+                <a class="button-68" style="background-color: red;" href="delete/{{ categorie.id }}">Delete</a>
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
 {% endblock %}

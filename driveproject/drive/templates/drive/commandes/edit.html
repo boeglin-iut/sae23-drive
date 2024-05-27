@@ -1,6 +1,12 @@
 {% extends "drive/base.html" %}
 
-{% block title %}Modification d'un client{% endblock %}
+{% block title %}Modification d'une commande{% endblock %}
 
 {% block content %}
+    <h1>Modification d'une commande</h1>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_ul }}
+        <button type="submit">Modifier</button>
+    </form>
 {% endblock %}

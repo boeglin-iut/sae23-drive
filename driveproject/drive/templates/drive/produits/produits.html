@@ -1,10 +1,41 @@
 {% extends "drive/base.html" %}
-
+{% load static %}
 {% block title %}Liste des produits{% endblock %}
 
 {% block content %}
     <h1>Liste des produits</h1>
-    {% for produits in Produits %}
-        <p>ID: {{ produits.id }} ; Nom : {{ produits.nom }} ; Date de péremption : {{ produits.date_de_peremption }} ; Photo : <img src="/media/{{ produits.photo }}" alt="{{ produits.nom }}"> ; Marque : {{ produits.marque }} ; Prix : {{ produits.prix }} ; ID_catégorie : {{ produits.id_categorie }}</p>
-    {% endfor %}
+    <table>
+        <tr>
+            <th>Photo</th>
+            <th>Nom</th>
+            <th>Date de péremption</th>
+            <th>Marque</th>
+            <th>Prix</th>
+            <th>ID_catégorie</th>
+            <th>Actions</th>  <!-- New column for actions -->
+        </tr>
+        {% for produit in Produits %}
+        <tr>
+            <td>
+                {% if produit.photo %}
+                    <img src="{{ produit.photo.url }}" alt="{{ produit.nom }}">
+                 {% else %}
+                    <p>No photo available</p>
+                {% endif %}
+            </td>
+            <td>{{ produit.nom }}</td>
+            <td>{{ produit.date_de_peremption }}</td>
+            <td>{{ produit.marque }}</td>
+            <td>{{ produit.prix }}</td>
+            <td>{{ produit.id_categorie.nom }}</td>
+            <td style="text-align: center;">
+                <a class="button-68" href="edit/{{ produit.id }}">update</a>
+                <a class="button-68" style="background-color: red;" href="delete/{{ produit.id }}">Delete</a>
+                <a class="button-68" style="background-color: green;" href="add_to_command/{{ produit.id }}">Add to Command</a>
+
+                </form>
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
 {% endblock %}

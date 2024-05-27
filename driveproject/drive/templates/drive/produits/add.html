@@ -4,9 +4,34 @@
 
 {% block content %}
     <h1>Ajout d'un produit</h1>
-    <form method="post" enctype="multipart/form-data">
+    <form method="post" enctype="multipart/form-data" class="form-container">
         {% csrf_token %}
-        {{ prodform.as_ul }}
-        <button type="submit">Ajouter</button>
+        <div class="form-group">
+            <label for="id_nom">Nom:</label>
+            {{ prodform.nom }}
+        </div>
+        <div class="form-group">
+            <label for="id_date_de_peremption">Date de péremption:</label>
+            {{ prodform.date_de_peremption }}
+        </div>
+        <div class="form-group">
+            <label for="id_photo">Photo:</label>
+            {{ prodform.photo }}
+        </div>
+        <div class="form-group">
+            <label for="id_marque">Marque:</label>
+            {{ prodform.marque }}
+        </div>
+        <div class="form-group">
+            <label for="id_prix">Prix:</label>
+            {{ prodform.prix }}
+        </div>
+        <div class="form-group">
+            <label for="id_id_categorie">Catégorie:</label>
+            {{ prodform.id_categorie}}
+        </div>
+        <button type="submit" class="button-68">Ajouter</button>
     </form>
+    <form method="post" enctype="multipart/form-data">
+    <button class="form-group" style="background-color: yellow;"><a href="/drive/produits/import/">Importer un produit</a></button>
 {% endblock %}

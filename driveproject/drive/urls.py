@@ -1,9 +1,12 @@
 from django.urls import path
 
+
+
 from . import views
 
 urlpatterns = [
     path('', views.index),
+    path('produits/import/', views.import_products, name='import_products'),
 
     path('categories/', views.categories),
     path('categories/<int:id>/', views.categories),
@@ -23,7 +26,7 @@ urlpatterns = [
     path('commandes/edit/<int:id>/', views.commandes_edit),
     path('commandes/delete/<int:id>/', views.commandes_delete),
 
-    path('liste_produits/', views.liste_produits),
+    path('liste_produits/<int:id>/', views.liste_produits),
     path('liste_produits/add/', views.liste_produits_add),
     path('liste_produits/edit/<int:id>/', views.liste_produits_edit),
     path('liste_produits/delete/<int:id>/', views.liste_produits_delete),
@@ -33,4 +36,6 @@ urlpatterns = [
     path('produits/add/', views.produits_add),
     path('produits/edit/<int:id>/', views.produits_edit),
     path('produits/delete/<int:id>/', views.produits_delete),
+
+    path('produits/add_to_command/<int:id>/', views.add_to_command, name='add_to_command'),
 ]

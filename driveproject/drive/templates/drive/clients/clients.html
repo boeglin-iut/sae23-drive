@@ -1,10 +1,29 @@
 {% extends "drive/base.html" %}
-
-{% block title %}Liste des client{% endblock %}
+{% load static %}
+{% block title %}Liste des clients{% endblock %}
 
 {% block content %}
     <h1>Liste des clients</h1>
-    {% for client in Clients %}
-        <p>ID: {{ client.id }} ; Nom : {{ client.nom }} ; Prénom : {{ client.prenom }} ; Date d'inscription : {{ client.date_inscription }} ; Adresse : {{ client.adresse }}</p>
-    {% endfor %}
+    <button class="button-68"><a href="/drive/clients/add/">Ajouter un client</a></button>
+    <table>
+        <tr>
+            <th>Nom</th>
+            <th>Prénom</th>
+            <th>Adresse</th>
+            <th>Date d'inscription</th>
+            <th>Actions</th>  <!-- New column for actions -->
+        </tr>
+        {% for client in Clients %}
+        <tr>
+            <td>{{ client.nom }}</td>
+            <td>{{ client.prenom }}</td>
+            <td>{{ client.adresse }}</td>
+            <td>{{ client.date_inscription }}</td>
+            <td style="text-align: center;">
+                <a class="button-68" href="edit/{{ client.id }}">update</a>
+                <a class="button-68" style="background-color: red;" href="delete/{{ client.id }}">Delete</a>
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
 {% endblock %}

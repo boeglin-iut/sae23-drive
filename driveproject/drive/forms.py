@@ -1,8 +1,7 @@
 from django import forms
 from django.forms import ModelForm
-from django.utils.translation import gettext_lazy as _
-from . import models
-from django.forms import ModelForm
+from .models import Categories
+
 from django.utils.translation import gettext_lazy as _
 from . import models
 
@@ -43,5 +42,25 @@ class ProduitsForm(ModelForm):
             'photo': _('Photo'),
             'marque': _('Marque'),
             'prix': _('Prix'),
-            'id_categorie': _('Catégorie'),
+            'id_categorie.nom': _('Catégorie'),
+        }
+from django import forms
+from .models import Commandes
+
+class AddToCommandForm(forms.Form):
+    commande = forms.ModelChoiceField(queryset=Commandes.objects.all())
+
+
+from django import forms
+from .models import ListeProduit
+
+from django import forms
+from .models import ListeProduit
+
+class ListeProduitForm(forms.ModelForm):
+    class Meta:
+        model = ListeProduit
+        fields = ['id_commande', 'id_produit', 'quantite']
+        widgets = {
+            'id_produit': forms.HiddenInput()
         }

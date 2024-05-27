@@ -4,7 +4,25 @@
 
 {% block content %}
     <h1>Liste des commandes</h1>
-    {% for commandes in Commandes %}
-        <p>ID : {{ commandes.id }} ; ID_client : {{ commandes.id_client }} ; Date : {{ commandes.date }}</p>
-    {% endfor %}
+    <a class="button-68" href="add/">ajouter une commande</a>
+    <table>
+        <tr>
+            <th>ID</th>
+            <th>ID_client</th>
+            <th>Date</th>
+            <th>Actions</th>  <!-- New column for actions -->
+        </tr>
+        {% for commandes in Commandes %}
+        <tr>
+            <td>{{ commandes.id }}</td>
+            <td>{{ commandes.id_client }}</td>
+            <td>{{ commandes.date }}</td>
+            <td style="text-align: center;">
+                <a class="button-68" href="edit/{{ commandes.id }}">update</a>
+                <a class="button-68" style="background-color: red;" href="delete/{{ commandes.id }}">Delete</a>
+                <a class="button-68" style="background-color: blue;" href="/drive/liste_produits/{{ commandes.id }}">View Products</a>
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
 {% endblock %}

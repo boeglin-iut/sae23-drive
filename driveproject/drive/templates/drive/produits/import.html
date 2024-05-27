@@ -1,0 +1,13 @@
+{% extends "drive/base.html" %}
+
+{% block title %}Ajout d'un produit{% endblock %}
+
+{% block content %}
+    <h1>Importer un produit en utilisant un fichier CSV</h1>
+
+    <form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    <input type="file" name="csvfile">
+    <button type="submit">Importer</button>
+</form>
+{% endblock %}

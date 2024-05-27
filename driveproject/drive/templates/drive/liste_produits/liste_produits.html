@@ -3,4 +3,19 @@
 {% block title %}Liste des produits dans la liste{% endblock %}
 
 {% block content %}
+    <h1>Liste des produits dans la commande</h1>
+    <table>
+        <tr>
+            <th>ID</th>
+            <th>Nom</th>
+            <th>Quantité</th>
+        </tr>
+        {% for produit in Produits %}
+        <tr>
+            <td>{{ produit.id_produit.id }}</td>
+            <td>{{ produit.id_produit.nom }}</td>
+            <td>{{ produit.quantite }}</td>
+        </tr>
+        {% endfor %}
+    </table>
 {% endblock %}
