@@ -3,4 +3,10 @@
 {% block title %}Modification d'un produit dans la liste{% endblock %}
 
 {% block content %}
+    <h1>Modification de la quantité d'un produit</h1>
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ lpeform.as_ul }}
+        <button type="submit">Modifier</button>
+    </form>
 {% endblock %}

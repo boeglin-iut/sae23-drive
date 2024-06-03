@@ -42,3 +42,23 @@ class ProduitsForm(ModelForm):
             'prix': _('Prix'),
             'id_categorie': _('Catégorie'),
         }
+        widgets = {
+            'date_de_peremption': forms.DateInput(attrs={'type': 'date'}),
+        }
+
+class ListeProduitForm(ModelForm):
+    class Meta:
+        model = models.ListeProduit
+        fields = ['id_commande', 'quantite']
+        labels = {
+            'id_commande': _('Commande'),
+            'quantite': _('Quantité'),
+        }
+
+class ListeProduitEditForm(ModelForm):
+    class Meta:
+        model = models.ListeProduit
+        fields = ['quantite']
+        labels = {
+            'quantite': _('Quantité'),
+        }

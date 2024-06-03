@@ -1,12 +1,40 @@
+{% load static %}
+
 <!DOCTYPE html>
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
     <title>Drive - {% block title %}{% endblock %}</title>
-    {% load static %}
-    <link rel="stylesheet" href="{% static 'drive/style.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'drive/style.css' %}">
 </head>
 <body>
+    <nav>
+        <ul>
+            <a href="/drive/" class='nav-but-drive'>Accueil</a>
+            <a href="/drive/produits/add/" class='nav-but'>Ajouter un produit</a>
+            <a href="/drive/categories/" class='nav-but'>Liste des catégories</a>
+            <a href="/drive/clients/" class='nav-but'>Liste des clients</a>
+            <a href="/drive/commandes/" class='nav-but'>Liste des commandes</a>
+            <a href="/drive/produits/" class='nav-but'>Liste des produits</a>
+        </ul>
+    </nav>
+
+    {% if messages %}
+        {% for message in messages %}
+            {% if message.tags == 'error' %}
+                <p class="error">{{ message }}</p>
+            {% elif message.tags == 'success' %}
+                <p class="success">{{ message }}</p>
+            {% endif %}
+        {% endfor %}
+    {% endif %}
+
     {% block content %}{% endblock %}
+
+    <footer>
+        <p>
+            <a href="https://github.com/boeglin-iut/sae23-drive" target="_blank">GitHub</a>
+        </p>
+    </footer>
 </body>
 </html>
