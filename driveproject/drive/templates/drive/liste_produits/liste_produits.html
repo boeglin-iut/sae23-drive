@@ -4,5 +4,23 @@
 
 {% block content %}
     <h1>Liste des produits d'une commande</h1>
-    <p>ID : {{ produits.id }} ; ID_commande : {{ produits.id_commande }} ; ID_produit : {{ produits.ID_produit }} ; Quantité : {{ produits.quantite }}</p>
+    <table>
+        <tr>
+            <th>ID du produit</th>
+            <th>Nom du produit</th>
+            <th>Quantité</th>
+        </tr>
+        {% for produit in Produits %}
+        <tr>
+            <td>{{ produit.id_produit.id }}</td>
+            <td>{{ produit.id_produit.nom }}</td>
+            <td>{{ produit.quantite }}</td>
+            <td>
+                <a class="button-68" href="/drive/liste_produits/edit/{{ produit.id }}">Modifier la quantité</a>
+                <a class="button-68" href="/drive/liste_produits/delete/{{ produit.id }}">Supprimer le produit de la commande</a>
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
+    <a href="/drive/liste_produits/pdf/{{ Commande.id }}">Générer un pdf</a>
 {% endblock %}

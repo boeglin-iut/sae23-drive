@@ -1,0 +1,2 @@
+nom,date_de_peremption,marque,prix,categorie_id
+<nom_du_produit>,<date_de_peremtion_sous_le_format_YYYY_MM_DD>,<marque>,<prix>,<ID_de_la_catégorie>

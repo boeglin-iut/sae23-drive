@@ -1,0 +1,21 @@
+{% extends "drive/base.html" %}
+{% load static %}
+
+{% block title %}Ajout d'un produit avec un fichier CSV{% endblock %}
+
+{% block content %}
+    <h1>Importer un produit en utilisant un fichier CSV</h1>
+
+    <div>
+        <h3>Comment ajouter un produit à l'aide d'un fichier CSV ?</h3>
+        <p>1. Téléchargez le fichier CSV modèle <a href="{% static 'drive/modele.csv' %}">ici</a>.</p>
+        <p>2. Remplissez le fichier CSV avec les informations du produit.</p>
+        <p>3. Importez le fichier CSV en utilisant le formulaire ci-dessous.</p>
+    </div>
+
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        <input type="file" name="csvfile">
+        <button type="submit">Importer</button>
+    </form>
+{% endblock %}

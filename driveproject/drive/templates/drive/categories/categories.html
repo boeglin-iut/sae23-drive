@@ -4,7 +4,22 @@
 
 {% block content %}
     <h1>Liste des catégories</h1>
-    {% for categorie in Categories %}
-        <p>ID: {{ categorie.id }} ; Nom : {{ categorie.nom }} ; Descriptif : {{ categorie.descriptif }}</p>
-    {% endfor %}
+    <button class="button-68"><a href="/drive/categories/add/">Ajouter une catégorie</a></button>
+    <table>
+        <tr>
+            <th>ID</th>
+            <th>Nom</th>
+            <th>Actions</th>
+        </tr>
+        {% for categorie in Categories %}
+        <tr>
+            <td>{{ categorie.id }}</td>
+            <td>{{ categorie.nom }}</td>
+            <td>
+                <a class="button-68" href="edit/{{ categorie.id }}">Modifier</a>
+                <a class="button-68" href="delete/{{ categorie.id }}">Supprimer</a>
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
 {% endblock %}
