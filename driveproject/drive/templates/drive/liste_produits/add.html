@@ -4,9 +4,9 @@
 
 {% block content %}
     <h1>Ajouter {{ produit.nom }} à une commande</h1>
-    <form method="post">
+    <form method="post" class="form-container">
         {% csrf_token %}
-        {{ form.as_p }}
-        <button type="submit">Ajouter à la commande</button>
+        {{ form }}
+        <button type="submit" class="button-68">Ajouter à la commande</button>
     </form>
 {% endblock %}

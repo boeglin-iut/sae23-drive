@@ -11,6 +11,10 @@ class CategoriesForm(ModelForm):
             'nom': _('Nom'),
             'descriptif': _('Descriptif'),
         }
+        widgets = {
+            'nom': forms.TextInput(attrs={'class': 'form-group'}),
+            'descriptif': forms.Textarea(attrs={'class': 'form-group'}),
+        }
 
 class ClientsForm(ModelForm):
     class Meta:
@@ -21,6 +25,11 @@ class ClientsForm(ModelForm):
             'prenom': _('Prénom'),
             'adresse': _('Adresse'),
         }
+        widgets = {
+            'nom': forms.TextInput(attrs={'class': 'form-group'}),
+            'prenom': forms.TextInput(attrs={'class': 'form-group'}),
+            'adresse': forms.Textarea(attrs={'class': 'form-group'}),
+        }
 
 class CommandesForm(ModelForm):
     class Meta:
@@ -28,6 +37,9 @@ class CommandesForm(ModelForm):
         fields = ['id_client']
         labels = {
             'id_client': _('Client'),
+        }
+        widgets = {
+            'id_client': forms.Select(attrs={'class': 'form-group'}),
         }
 
 class ProduitsForm(ModelForm):
@@ -43,7 +55,12 @@ class ProduitsForm(ModelForm):
             'id_categorie': _('Catégorie'),
         }
         widgets = {
-            'date_de_peremption': forms.DateInput(attrs={'type': 'date'}),
+            'nom': forms.TextInput(attrs={'class': 'form-group'}),
+            'date_de_peremption': forms.DateInput(attrs={'class': 'form-group', 'type': 'date'}),
+            'photo': forms.FileInput(attrs={'class': 'form-group'}),
+            'marque': forms.TextInput(attrs={'class': 'form-group'}),
+            'prix': forms.NumberInput(attrs={'class': 'form-group'}),
+            'id_categorie': forms.Select(attrs={'class': 'form-group'}),
         }
 
 class ListeProduitForm(ModelForm):
@@ -54,6 +71,10 @@ class ListeProduitForm(ModelForm):
             'id_commande': _('Commande'),
             'quantite': _('Quantité'),
         }
+        widgets = {
+            'id_commande': forms.Select(attrs={'class': 'form-group'}),
+            'quantite': forms.NumberInput(attrs={'class': 'form-group'}),
+        }
 
 class ListeProduitEditForm(ModelForm):
     class Meta:
@@ -61,4 +82,7 @@ class ListeProduitEditForm(ModelForm):
         fields = ['quantite']
         labels = {
             'quantite': _('Quantité'),
+        }
+        widgets = {
+            'quantite': forms.NumberInput(attrs={'class': 'form-group'}),
         }

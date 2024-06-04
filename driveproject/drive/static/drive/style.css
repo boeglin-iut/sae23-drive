@@ -1,3 +1,143 @@
-* {
-    text-align: center;
+body {
+    font-family: 'Montserrat', sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+nav {
+    background-color: #353430;
+    font-size: 140%;
+    padding: 1%;
+}
+
+.nav-but {
+    color:rgb(255, 255, 255);
+    text-decoration: solid;
+    margin-left: 2%;
+}
+
+.nav-but-drive{
+    color:#3891ff;
+    text-decoration: solid;
+}
+
+a {
+    text-decoration: none;
+    color:white;
+}
+
+a:hover{
+    transition-duration: 200ms;
+    color: rgb(102, 94, 94);
+}
+
+.Body {
+    padding-bottom: 4%;
+    background-color: #323131;
+    font-family: "Montserrat", sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    height: 90vh;
+}
+
+h1 {
+    color:white;
+    font-size: 300%;
+}
+
+.text {
+    color:white;
+}
+
+.form-container {
+    background-color: #f0f0f0;
+    padding: 20px 40px;
+    border-radius: 10px;
+    max-width: 400px;
+    width: 120%;
+    color:black;
+}
+
+.form-group {
+    margin-bottom: 10px;
+    border-radius:5px;
+    border-style: none;
+    padding:7px;
+    color: #323131;
+}
+
+.but-imp{
+    background-color: #494845;
+    margin-top: 10px;
+    border-radius:5px;
+    border-style: none;
+    padding:7px;
+}
+.but-imp a{
+    text-decoration: none;
+    color: white;
+}
+
+label {
+    display: block;
+    margin-bottom: 5px;
+}
+
+.button-68 {
+  background-color: #b3b3b3;
+  border-radius: 8px;
+  border-style: none;
+  color: #fff;
+  cursor: pointer;
+  display: inline-block;
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 0.1;
+  padding: 13px 4px;
+  text-align: center;
+  text-decoration: none;
+}
+
+.button-68:hover {
+  background-color: #a0a0a0;
+  transition-duration: 300ms;
+}
+
+.tableau-cont {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 80px;
+}
+
+.tableau-wrap {
+    flex: 1;
+    min-width: 300px;
+}
+table{
+    margin-top:25px;
+}
+
+td {
+    color:rgb(183, 183, 183);
+    padding: 10px;
+}
+
+th {
+    color:rgb(183, 183, 183);
+}
+
+footer {
+    background-color: rgb(36, 33, 33);
+    padding: 40px;
+    color: white;
+}
+footer a {
+    text-decoration: none;
+    color:white;
+}
+
+.img-class {
+    width: 200px;
 }

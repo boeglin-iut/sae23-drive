@@ -4,9 +4,9 @@
 
 {% block content %}
     <h1>Modification d'un client</h1>
-    <form method="post">
+    <form method="post" class="form-container">
         {% csrf_token %}
-        {{ cliform.as_ul }}
-        <button type="submit">Modifier</button>
+        {{ cliform }}
+        <button type="submit" class="button-68">Modifier</button>
     </form>
 {% endblock %}

@@ -4,12 +4,12 @@
 
 {% block content %}
     <h1>Ajout d'un produit</h1>
-    <form method="post" enctype="multipart/form-data">
+    <form method="post" enctype="multipart/form-data" class="form-container">
         {% csrf_token %}
-        {{ prodform.as_ul }}
-        <button type="submit">Ajouter</button>
+        {{ prodform }}
+        <button type="submit" class="button-68">Ajouter</button>
     </form>
     <form method="post" enctype="multipart/form-data">
-        <a href="/drive/produits/import/">Importer un produit depuis un fichier CSV</a>
+        <a href="/drive/produits/import/" class="button-68">Importer un produit depuis un fichier CSV</a>
     </form>
 {% endblock %}
