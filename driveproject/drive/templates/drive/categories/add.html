@@ -4,9 +4,9 @@
 
 {% block content %}
     <h1>Ajout d'une catégorie</h1>
-    <form method="post">
+    <form method="post" class="form-container">
         {% csrf_token %}
-        {{ catform.as_ul }}
-        <button type="submit">Ajouter</button>
+        {{ catform }}
+        <button type="submit" class="button-68">Ajouter</button>
     </form>
 {% endblock %}

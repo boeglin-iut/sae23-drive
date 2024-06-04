@@ -4,9 +4,9 @@
 
 {% block content %}
     <h1>Modification de la quantité d'un produit</h1>
-    <form method="post" enctype="multipart/form-data">
+    <form method="post" enctype="multipart/form-data" class="form-container">
         {% csrf_token %}
         {{ lpeform.as_ul }}
-        <button type="submit">Modifier</button>
+        <button type="submit" class="button-68">Modifier</button>
     </form>
 {% endblock %}
