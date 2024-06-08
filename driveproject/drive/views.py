@@ -274,6 +274,10 @@ def produits_add(request):
 
 def produits_import(request):
     if request.method == 'POST':
+        if 'csvfile' not in request.FILES:
+            messages.error(request, "Aucun fichier CSV n'a été téléchargé.")
+            return HttpResponseRedirect('/drive/produits/import/')
+
         csvfile = request.FILES['csvfile']
         reader = csv.reader(csvfile.read().decode('utf-8').splitlines())
         next(reader)
@@ -292,9 +296,9 @@ def produits_import(request):
                 id_categorie=categorie
             )
         return HttpResponseRedirect('/drive/produits/')
-        #return render(request, 'drive/produits/produits.html', {'Produits': Produits.objects.all()})
     else:
         return render(request, 'drive/produits/import.html')
+
 
 def produits_edit(request, id):
     if request.method == 'POST':
