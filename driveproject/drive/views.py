@@ -3,10 +3,10 @@ from datetime import datetime
 import io
 
 from reportlab.platypus import SimpleDocTemplate, Paragraph, Spacer
-from reportlab.lib.units import cm
 from reportlab.platypus import Table, TableStyle
 from reportlab.lib import colors
 from reportlab.lib.styles import getSampleStyleSheet
+from reportlab.lib.units import cm
 
 from django.http import HttpResponseRedirect, FileResponse
 from django.shortcuts import render
@@ -43,7 +43,6 @@ def categories_edit(request, id):
         if catform.is_valid():
             catform.save()
             return HttpResponseRedirect('/drive/categories/')
-            #return render(request, 'drive/categories/categories.html', {'Categories': Categories.objects.all()})
         else:
             return render(request, 'drive/categories/edit.html', {'catform': catform})
     else:
@@ -69,7 +68,6 @@ def clients_add(request):
             form.date_inscription = date
             form.save()
             return HttpResponseRedirect('/drive/clients/')
-            #return render(request, 'drive/clients/clients.html', {'Clients': Clients.objects.all()})
         else:
             return render(request, 'drive/clients/add.html', {'cliform': cliform})
     else:
@@ -83,7 +81,6 @@ def clients_edit(request, id):
         if cliform.is_valid():
             cliform.save()
             return HttpResponseRedirect('/drive/clients/')
-            #return render(request, 'drive/clients/clients.html', {'Clients': Clients.objects.all()})
         else:
             return render(request, 'drive/clients/edit.html', {'cliform': cliform})
     else:
@@ -109,7 +106,6 @@ def commandes_add(request):
             form.date = date
             form.save()
             return HttpResponseRedirect('/drive/commandes/')
-            #return render(request, 'drive/commandes/commandes.html', {'Commandes': Commandes.objects.all()})
         else:
             return render(request, 'drive/commandes/add.html', {'comform': comform})
     else:
@@ -123,7 +119,6 @@ def commandes_edit(request, id):
         if comform.is_valid():
             comform.save()
             return HttpResponseRedirect('/drive/commandes/')
-            #return render(request, 'drive/commandes/commandes.html', {'Commandes': Commandes.objects.all()})
         else:
             return render(request, 'drive/commandes/edit.html', {'comform': comform})
     else:
@@ -151,7 +146,6 @@ def liste_produits_add(request, id):
             form.save()
             id_commande = form.id_commande.id
             return HttpResponseRedirect('/drive/liste_produits/' + str(id_commande) + '/')
-            #return render(request, 'drive/liste_produits/liste_produits.html', {'Produits': ListeProduit.objects.all()})
         else:
             return render(request, 'drive/liste_produits/add.html', {'form': lpform})
     else:
@@ -166,7 +160,6 @@ def liste_produits_edit(request, id):
             lpeform.save()
             id_commande = Liste_Produit.id_commande.id
             return HttpResponseRedirect('/drive/liste_produits/' + str(id_commande) + '/')
-            #return render(request, 'drive/liste_produits/liste_produits.html', {'Produits': ListeProduit.objects.all()})
         else:
             return render(request, 'drive/liste_produits/edit.html', {'lpeform': lpeform})
     else:
@@ -256,8 +249,8 @@ def liste_produits_pdf(request, id):
         return HttpResponseRedirect('/drive/commandes/')
 
 def produits(request):
-    Produit = Produits.objects.all()
-    return render(request, 'drive/produits/produits.html', {'Produits': Produit})
+    produit = Produits.objects.all()
+    return render(request, 'drive/produits/produits.html', {'Produits': produit})
 
 def produits_add(request):
     if request.method == 'POST':
@@ -265,7 +258,6 @@ def produits_add(request):
         if prodform.is_valid():
             prodform.save()
             return HttpResponseRedirect('/drive/produits/')
-            #return render(request, 'drive/produits/produits.html', {'Produits': Produits.objects.all()})
         else:
             return render(request, 'drive/produits/add.html', {'prodform': prodform})
     else:
@@ -274,7 +266,16 @@ def produits_add(request):
 
 def produits_import(request):
     if request.method == 'POST':
+        if 'csvfile' not in request.FILES:
+            messages.error(request, "Aucun fichier CSV n'a été téléchargé.")
+            return HttpResponseRedirect('/drive/produits/import/')
+
         csvfile = request.FILES['csvfile']
+
+        if not csvfile.name.endswith('.csv'):
+            messages.error(request, "Le fichier téléchargé n'est pas un fichier CSV.")
+            return HttpResponseRedirect('/drive/produits/import/')
+
         reader = csv.reader(csvfile.read().decode('utf-8').splitlines())
         next(reader)
         for row in reader:
@@ -292,7 +293,6 @@ def produits_import(request):
                 id_categorie=categorie
             )
         return HttpResponseRedirect('/drive/produits/')
-        #return render(request, 'drive/produits/produits.html', {'Produits': Produits.objects.all()})
     else:
         return render(request, 'drive/produits/import.html')
 
@@ -303,7 +303,6 @@ def produits_edit(request, id):
         if prodform.is_valid():
             prodform.save()
             return HttpResponseRedirect('/drive/produits/')
-            #return render(request, 'drive/produits/produits.html', {'Produits': Produits.objects.all()})
         else:
             return render(request, 'drive/produits/edit.html', {'prodform': prodform})
     else:
