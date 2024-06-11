@@ -296,6 +296,7 @@ def produits_import(request):
     else:
         return render(request, 'drive/produits/import.html')
 
+
 def produits_edit(request, id):
     if request.method == 'POST':
         Produit = Produits.objects.get(id=id)
