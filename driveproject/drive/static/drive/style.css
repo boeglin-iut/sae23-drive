@@ -141,3 +141,15 @@ footer a {
 .img-class {
     width: 200px;
 }
+
+p.delete {
+    color: white;
+}
+
+.import {
+    background-color: #494845;
+    border-radius:5px;
+    border-style: none;
+    padding:7px;
+    color: white;
+}
