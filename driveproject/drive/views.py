@@ -276,22 +276,27 @@ def produits_import(request):
             messages.error(request, "Le fichier téléchargé n'est pas un fichier CSV.")
             return HttpResponseRedirect('/drive/produits/import/')
 
-        reader = csv.reader(csvfile.read().decode('utf-8').splitlines())
+        file_data = csvfile.read().decode('utf-8')
+        lines = file_data.split("\n")
+        reader = csv.reader(lines)
         next(reader)
+
         for row in reader:
-            id_categorie_id = row[4]
-            try:
-                categorie = Categories.objects.get(id=id_categorie_id)
-            except Categories.DoesNotExist:
-                messages.error(request, "La catégorie n'existe pas ou n'existe plus.")
-                return HttpResponseRedirect('/drive/produits/import/')
-            _, created = Produits.objects.get_or_create(
-                nom=row[0],
-                date_de_peremption=row[1],
-                marque=row[2],
-                prix=row[3],
-                id_categorie=categorie
-            )
+            if row:
+                elements = row[0].split(',')
+                id_categorie_id = elements[4]
+                try:
+                    categorie = Categories.objects.get(id=id_categorie_id)
+                except Categories.DoesNotExist:
+                    messages.error(request, "La catégorie n'existe pas ou n'existe plus.")
+                    return HttpResponseRedirect('/drive/produits/import/')
+                _, created = Produits.objects.get_or_create(
+                    nom=elements[0],
+                    date_de_peremption=elements[1],
+                    marque=elements[2],
+                    prix=elements[3],
+                    id_categorie=categorie
+                )
         return HttpResponseRedirect('/drive/produits/')
     else:
         return render(request, 'drive/produits/import.html')
