@@ -153,3 +153,14 @@ p.delete {
     padding:7px;
     color: white;
 }
+
+.error {
+    color: red;
+    background-color: #323131;
+    display: flex;
+    justify-content: center;
+    margin-top: 0px;
+    margin-bottom: 0px;
+    padding: 20px;
+    font-size: 20px;
+}
